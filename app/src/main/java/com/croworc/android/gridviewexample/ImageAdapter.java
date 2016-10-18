@@ -54,7 +54,16 @@ class ImageAdapter extends BaseAdapter {
             // it *is* recycled, so just re-use it
             imageView = (ImageView) convertView;
         }
+        // No matter whether new image or recycled one: now we need to set its image resource.
         imageView.setImageResource(mThumbIds[position]);
+
+        // Implement accessibility feature "content description":
+        // Dynamically create the content description for this image.
+        // Will be used for the TalkBack service. When selecting (not clicking) this image,
+        // the content description will be read-out loud, like "Image 16".
+        String contentDescription = mContext.getString(R.string.image_content_description) + position;
+        imageView.setContentDescription(contentDescription);
+
         return imageView;
     }
 
