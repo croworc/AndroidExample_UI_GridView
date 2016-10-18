@@ -39,22 +39,29 @@ class ImageAdapter extends BaseAdapter {
     }
 
 
-    // create a new ImageView for each item referenced by the Adapter
+    /** Create a new ImageView for each item referenced by the Adapter
+     *
+     * @param position      The ImageView's position within the GridView (zero-based)
+     * @param convertView   The ImageView, new or recycled one, *before* our processing
+     * @param parent        The GridView
+     * @return              The readily set up ImageView
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {
-            // if it's *not* recycled, initialize some attributes
+            // If it's *not* recycled, create a new ImageView and initialize some attributes.
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(125, 125));
             // imageView.setAdjustViewBounds(true);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
         } else {
-            // it *is* recycled, so just re-use it
+            // ImageView *is* recycled, so just re-use it.
             imageView = (ImageView) convertView;
         }
-        // No matter whether new image or recycled one: now we need to set its image resource.
+        // No matter whether *new* image or *recycled* one:
+        // now we need to set its image resource.
         imageView.setImageResource(mThumbIds[position]);
 
         // Implement accessibility feature "content description":
@@ -65,9 +72,9 @@ class ImageAdapter extends BaseAdapter {
         imageView.setContentDescription(contentDescription);
 
         return imageView;
-    }
+    } // end method getView()
 
-    // references to our images
+    // Static data for use with our ImageAdapter: references to our images.
     private Integer[] mThumbIds = {
             R.drawable.sample_0, R.drawable.sample_1,
             R.drawable.sample_2, R.drawable.sample_3,
